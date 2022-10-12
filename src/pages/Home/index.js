@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import { PageArea, SearchArea } from "./styled";
-import { PageContainer,ErrorMessage } from "../../components/MainComponents";
+import { PageContainer } from "../../components/MainComponents";
 import useApi from "../../helpers/OlxAPI";
 import AdItem from "../../components/partials/AdItem";
 
