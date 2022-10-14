@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useParams, LinK} from "react-router-dom";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styled.css";
-import { PageArea, Fake } from "./styled";
+import { PageArea, Fake, OtherArea, BreadChumb } from "./styled";
 import { PageContainer } from "../../components/MainComponents";
+import AdItem from "../../components/partials/AdItem";
 import useApi from "../../helpers/OlxAPI";
 
 
@@ -31,7 +32,7 @@ const Page = () =>{
             'março',
             'abril',
             'maio',
-            'jinho',
+            'junho',
             'julho',
             'agosto',
             'setembro',
@@ -47,6 +48,21 @@ const Page = () =>{
     
     return (  
      <PageContainer>
+        {adInfo.category &&
+            <BreadChumb>
+                Você está aqui:
+                <LinK to= "/">Home</LinK>
+                /
+                <LinK to={`/ads?state=${adInfo.stateName}`}>
+                    {adInfo.stateName}
+                </LinK>
+                /
+                <LinK to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`}>
+                {adInfo.category.name}
+                </LinK>
+                / {adInfo.title}
+       </BreadChumb>
+        }
         <PageArea>
         <div className="leftSide">
             <div className="box">
@@ -89,13 +105,47 @@ const Page = () =>{
         <div className="rightSide">
             <div className="box box--padding">
                 {loading && <Fake height={20}/>}
+                {adInfo.priceNegotiabled &&
+                "Preço Negocável"
+                }
+                {!adInfo.priceNegotiabled && adInfo.price &&
+                    <div className="price">
+                        Preço: <span>R${adInfo.price}</span>
+                    </div>                
+
+                }
             </div>
-            <div className="box box--padding">
-                {loading && <Fake height={50}/>}
+            {loading && <Fake height={50}/>}
+            { adInfo.userInfo &&
+            <>
+            <a 
+            href={`mailto:${adInfo.userInfo.email}`}
+            target="_blank"
+            className="contactSellerLink"
+            >
+                Fale com o vendedor
+            </a>
+            <div className="createBy box box--padding">
+                <strong>{adInfo.userInfo.name}</strong>
+                <small>Email: {adInfo.userInfo.email}</small>
+                <small>Estado: {adInfo.userInfo.stateName}</small>
             </div>
+            </>
+            }   
         </div>
      </PageArea>
-
+     <OtherArea>
+        {adInfo.others &&
+        <>
+            <h2>Outras ofertas do vendedor</h2>
+            <div className="List">
+                {adInfo.others.map((i,k)=>
+                <AdItem key={k} data={i}/>
+                )}
+            </div>
+        </>
+        }
+     </OtherArea>
      </PageContainer>
         
       
