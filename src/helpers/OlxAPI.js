@@ -42,11 +42,31 @@ const apiFetchGet = async (endpoint, body =[]) => {
     }
     return json;
 }
+
+const apiFetchFile = async (endpoint, body) => {
+    if (!body.token){
+        let token = Cookies.get('token');
+        if (token){
+            body.append ("token", token);
+        }
+    }
+    const res = await fetch(BASEAPI + endpoint, {
+        method: 'POST',
+        body
+    });
+    const data = await res.json();
+    if (data.notallowed){
+        window.location.href ='/signin';
+        return;
+    }
+    return data;
+}
+
 const OlxAPI = {
     login: async (email, password) =>{
         const json = await apiFetchPost('user/signin', {email, password});
         return json;
-        //recebe o json e envia    
+     
     },
     register: async (name, stateloc, email, password)=>{
         const json = await apiFetchPost('user/signup',{
@@ -72,7 +92,7 @@ const OlxAPI = {
             '/ad/list',
             options
         );
-        return json; //lista de anuncios//
+        return json; 
     },
 
     getAd: async (id, otherAds = false) => {
@@ -81,6 +101,13 @@ const OlxAPI = {
             {id, otherAds}
         );
         return json;
+    },
+    addAd: async (formData) =>{
+        const response = apiFetchFile(
+            '/ad/add',
+            formData
+        );
+        return response;
     }
 
 

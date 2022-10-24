@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import {useParams, LinK} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styled.css";
+import "react-slideshow-image/dist/styles.css";
 import { PageArea, Fake, OtherArea, BreadChumb } from "./styled";
 import { PageContainer } from "../../components/MainComponents";
 import AdItem from "../../components/partials/AdItem";
@@ -51,15 +51,15 @@ const Page = () =>{
         {adInfo.category &&
             <BreadChumb>
                 Você está aqui:
-                <LinK to= "/">Home</LinK>
+                <Link to= "/">Home</Link>
                 /
-                <LinK to={`/ads?state=${adInfo.stateName}`}>
+                <Link to={`/ads?state=${adInfo.stateName}`}>
                     {adInfo.stateName}
-                </LinK>
+                </Link>
                 /
-                <LinK to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`}>
+                <Link to={`/ads?state=${adInfo.stateName}&cat=${adInfo.category.slug}`}>
                 {adInfo.category.name}
-                </LinK>
+                </Link>
                 / {adInfo.title}
        </BreadChumb>
         }

@@ -105,7 +105,8 @@ const Page =() =>{
                             E-mail
                         </div>
                         <div className="area--input">
-                            <input type="email" 
+                            <input
+                            type="email" 
                             disabled={disabled}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
