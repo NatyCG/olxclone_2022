@@ -29,7 +29,7 @@ export default () =>{
                 <AdPage />
             </RouterHandler> 
             <RouterHandler exact path= "/post-an-ad">
-                <AddAd />
+                <AddAd/>
             </RouterHandler> 
             <RouterHandler private exact path= "/my-account">
                 <About />
