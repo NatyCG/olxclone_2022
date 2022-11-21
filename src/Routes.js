@@ -7,7 +7,9 @@ import NotFound from './pages/NotFound';
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import AdPage from "./pages/AdPage";
-import AddAd from './pages/AddAd';
+import AddAd from "./pages/AddAd";
+import Ads from "./pages/Ads"; 
+import MyAccount from "./pages/MyAccount"; 
 
 
 export default () =>{
@@ -28,11 +30,14 @@ export default () =>{
             <RouterHandler exact path= "/ad/:id">
                 <AdPage />
             </RouterHandler> 
-            <RouterHandler exact path= "/post-an-ad">
+            <RouterHandler exact path= "/ads">
+                <Ads />
+            </RouterHandler> 
+            <RouterHandler private exact path= "/post-an-ad">
                 <AddAd/>
             </RouterHandler> 
             <RouterHandler private exact path= "/my-account">
-                <About />
+                <MyAccount />
             </RouterHandler> 
             <RouterHandler path="*" >
                 <NotFound />
