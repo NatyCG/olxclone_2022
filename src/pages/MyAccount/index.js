@@ -31,7 +31,7 @@ const Page = () => {
     const api = useAPI();
     const fileField = useRef();
 
-    const [user, setUser] = useSate({});
+    const [user, setUser] = useState({});
     const [disabled, setDisabled] = useState(false);
     const [adsList, setAdsList] = useState([]);
 
